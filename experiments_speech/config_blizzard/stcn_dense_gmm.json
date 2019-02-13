@@ -1,0 +1,121 @@
+{
+    "batch_size": 128,
+    "checkpoint_every_step": 2000,
+    "cnn_layer": {
+        "activation_fn": "relu",
+        "dilation_size": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16
+        ],
+        "dropout_rate": 0.0,
+        "filter_size": 2,
+        "num_decoder_layers": 0,
+        "num_encoder_layers": 25,
+        "num_filters": 256,
+        "use_gating": true,
+        "use_residual": true,
+        "use_skip": false,
+        "zero_padding": true
+    },
+    "data_type": "blizzard",
+    "dataset_cls": "DatasetTF",
+    "decoder_use_enc_skip": false,
+    "decoder_use_raw_inputs": false,
+    "decoder_use_enc_last": false,
+    "evaluate_every_step": 2000,
+    "grad_clip_by_norm": 1,
+    "grad_clip_by_value": 0,
+    "input_layer": {
+        "dropout_rate": 0
+    },
+    "latent_layer": {
+        "dynamic_prior": true,
+        "hidden_activation_fn": "relu",
+        "kld_p0_z0": false,
+        "kld_q0_z0": false,
+        "kld_weight": {
+            "type": "linear_decay",
+            "values": [
+                0,
+                1.0,
+                0.0001
+            ]
+        },
+        "latent_dilation": 1,
+        "latent_filter_size": 1,
+        "latent_sigma_threshold": 5.0,
+        "latent_size": [
+            256,
+            128,
+            64,
+            32,
+            16
+        ],
+        "layer_structure": "conv1",
+        "num_hidden_layers": 2,
+        "num_hidden_units": 256,
+        "precision_weighted_update": true,
+        "recursive_q": true,
+        "top_down_latents": true,
+        "type": "latent_ladder_gaussian",
+        "dense_z": true,
+        "use_fixed_pz1": false,
+        "use_same_q_sample": false,
+        "vertical_dilation": 5
+    },
+    "learning_rate": 0.001,
+    "learning_rate_decay_rate": 0.98,
+    "learning_rate_decay_steps": 1000,
+    "learning_rate_type": "exponential",
+    "loss": {
+        "out": {
+            "num_components": 20,
+            "out_key": "out",
+            "target_idx": 0,
+            "type": "nll_gmm",
+            "weight": 1
+        }
+    },
+    "model_cls": "StochasticTCN",
+    "model_type": "stcn",
+    "num_epochs": 100,
+    "output_layer": {
+        "activation_fn": "relu",
+        "filter_size": 2,
+        "num_layers": 5,
+        "out_activation_fn": [],
+        "out_dims": [],
+        "out_keys": [],
+        "size": 256,
+        "type": "tcn"
+    },
+    "print_every_step": 100,
+    "reduce_loss": "mean_sequence_loss",
+    "seed": 1234,
+    "tensorboard_verbose": 1,
+    "test_model": false,
+    "validate_model": true
+}
