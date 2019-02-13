@@ -1,0 +1,94 @@
+{
+    "batch_size": 32,
+    "checkpoint_every_step": 1000,
+    "cnn_layer": {
+        "activation_fn": "relu",
+        "dilation_size": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16,
+            1,
+            2,
+            4,
+            8,
+            16
+        ],
+        "filter_size": 2,
+        "num_filters": 256,
+        "num_layers": 25,
+        "tcn_output_layer_idx": [
+            4,
+            14,
+            24
+        ],
+        "use_gating": true,
+        "use_residual": true,
+        "use_skip": false,
+        "zero_padding": true
+    },
+    "data_type": "dw",
+    "dataset_cls": "InkDatasetTF",
+    "evaluate_every_step": 500,
+    "grad_clip_by_norm": 1,
+    "grad_clip_by_value": 0,
+    "input_layer": {
+        "dropout_rate": 0.0
+    },
+    "learning_rate": 0.0005,
+    "learning_rate_decay_rate": 0.95,
+    "learning_rate_decay_steps": 1000,
+    "learning_rate_type": "exponential",
+    "loss": {
+        "pen": {
+            "out_key": "out",
+            "target_idx": 1,
+            "type": "nll_bernoulli",
+            "weight": 1
+        },
+        "stroke": {
+            "num_components": 20,
+            "out_key": "out",
+            "target_idx": 0,
+            "type": "nll_gmm",
+            "weight": 1
+        }
+    },
+    "model_cls": "TCN",
+    "model_type": "tcn",
+    "num_epochs": 80,
+    "output_layer": {
+        "activation_fn": "relu",
+        "num_layers": 2,
+        "out_activation_fn": [],
+        "out_dims": [],
+        "out_keys": [],
+        "size": 256,
+        "type": "conv1"
+    },
+    "pp_zero_mean_norm_all_stats": false,
+    "pp_zero_mean_norm_seq_stats": true,
+    "pp_zero_mean_normalization": false,
+    "print_every_step": 50,
+    "reduce_loss": "mean_step_loss",
+    "seed": 23,
+    "tensorboard_verbose": 1,
+    "test_model": false,
+    "validate_model": true
+}
