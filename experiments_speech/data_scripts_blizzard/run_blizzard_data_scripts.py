@@ -1,3 +1,10 @@
+"""
+Preprocessing script for Blizzard data. The same steps with VRNN (https://arxiv.org/abs/1506.02216) and
+Z-forcing (https://arxiv.org/abs/1711.05411) are applied.
+
+You can download Blizzard dataset from https://www.synsig.org/index.php/Blizzard_Challenge_2013
+"""
+
 import os
 import pickle
 import tables
@@ -5,21 +12,18 @@ import numpy as np
 from scipy.io import wavfile
 from blizzard_data import Blizzard_tbptt
 
-"""
-Preprocessing script for Blizzard data. The same steps with VRNN (https://arxiv.org/abs/1506.02216) and
-Z-forcing (https://arxiv.org/abs/1711.05411) are applied.
-Download dataset from https://www.synsig.org/index.php/Blizzard_Challenge_2013.  
-"""
-
 # Path to the unsegmented Blizzard dataset. Don't add "./"
-BLIZZARD_DATA_PATH = "blizzard_data_demo/unsegmented"
+BLIZZARD_DATA_PATH = "<>/unsegmented"
 # Temporarily created destination for intermediate files.
 TMP_DIR = "tmp"
 # Destination of the dataset files.
-OUTPUT_DIR = "blizzard"
+OUTPUT_DIR = "data_blizzard"
+OUTPUT_FILE = "blizzard_stcn"
 
-os.mkdir(TMP_DIR)
-os.mkdir(OUTPUT_DIR)
+if not os.path.exists(TMP_DIR):
+    os.mkdir(TMP_DIR)
+if not os.path.exists(OUTPUT_DIR):
+    os.mkdir(OUTPUT_DIR)
 
 ###
 # 1-List .mp3 files
@@ -88,8 +92,6 @@ print("Num examples: " + str(train_data.num_examples()))
 ###
 input_data_folder = TMP_DIR
 hdf5_data_file = "blizzard_unseg_tbptt"
-output_data_folder = OUTPUT_DIR
-output_data_file = "blizzard_stcn"
 
 # These numbers are taken from Z-forcing repository.
 train_start, train_end = 0, 2040064
@@ -125,15 +127,15 @@ test_dataset["samples"] = dataset_all[test_start:test_end].reshape(-1, 40, 200)
 # Save
 if training_dataset is not None:
     print("# training samples: " + str(len(training_dataset['samples'])))
-    training_path = os.path.join(output_data_folder, output_data_file + "_training")
+    training_path = os.path.join(OUTPUT_DIR, OUTPUT_FILE + "_training")
     np.savez_compressed(training_path, **training_dataset)
 
 if validation_dataset is not None:
     print("# validation samples: " + str(len(validation_dataset['samples'])))
-    validation_path = os.path.join(output_data_folder, output_data_file + "_validation")
+    validation_path = os.path.join(OUTPUT_DIR, OUTPUT_FILE + "_validation")
     np.savez_compressed(validation_path, **validation_dataset)
 
 if test_dataset is not None:
     print("# test samples: " + str(len(test_dataset['samples'])))
-    validation_path = os.path.join(output_data_folder, output_data_file + "_test")
+    validation_path = os.path.join(OUTPUT_DIR, OUTPUT_FILE + "_test")
     np.savez_compressed(validation_path, **test_dataset)
