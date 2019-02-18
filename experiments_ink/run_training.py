@@ -8,6 +8,31 @@ import argparse
 import os
 import glob
 
+"""
+Example run command for STCN-dense model with GMM on Deepwriting dataset. Note that we don't have test split.
+    python run_training.py 
+        --experiment_name <a descriptive name such as `stcn_dense_gmm`> 
+        --json_file ./config_deepwriting/stcn_dense_gmm.json 
+        --training_data <PATH-TO>/deepwriting_training.npz 
+        --validation_data <PATH-TO>/deepwriting_validation.npz  
+        --save_dir <PATH-TO>/runs 
+        --eval_dir <PATH-TO>/evaluation_runs
+        --pp_zero_mean_normalization 
+        --run_evaluation_after_training
+
+Example run command for STCN-dense model with GMM outputs on Iamondb handwriting dataset. Note that we don't have a 
+test split and the normalization flag is different. See `source/data_operators.py`.    
+    python run_training.py 
+        --experiment_name <a descriptive name such as `stcn_dense_gmm`>
+        --json_file ./config_iamondb/stcn_dense_gmm.json 
+        --training_data <PATH-TO>/iamondb_stcn_training.npz 
+        --validation_data <PATH-TO>/iamondb_stcn_validation.npz   
+        --save_dir <PATH-TO>/runs 
+        --eval_dir <PATH-TO>/evaluation_runs  
+        --pp_zero_mean_norm_seq_stats 
+        --run_evaluation_after_training
+"""
+
 
 def run_training(config_obj, early_stopping_tolerance=10, run_evaluation_after_training=False):
     training_engine = TrainingEngine(config_obj, early_stopping_tolerance)

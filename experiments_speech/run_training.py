@@ -8,6 +8,32 @@ import argparse
 import os
 import glob
 
+"""
+Example run command for STCN-dense model with GMM outputs on Blizzard dataset.    
+    python run_training.py 
+        --experiment_name <a descriptive name such as `stcn_dense_gmm`>
+        --json_file ./config_blizzard/stcn_dense_gmm.json 
+        --training_data <PATH-TO>/blizzard_stcn_training.npz 
+        --validation_data <PATH-TO>/blizzard_stcn_validation.npz  
+        --test_data <PATH-TO>/blizzard_stcn_test.npz 
+        --save_dir <PATH-TO>/runs 
+        --eval_dir <PATH-TO>/evaluation_runs  
+        --pp_zero_mean_norm_all_stats 
+        --run_evaluation_after_training
+    
+Example run command for Wavenet model with GMM outputs on TIMIT dataset.
+    python run_training.py 
+        --experiment_name <a descriptive name such as `wavenet_gmm`> 
+        --json_file ./config_timit/wavenet_gmm.json 
+        --training_data <PATH-TO>/timit_stcn_training.npz 
+        --validation_data <PATH-TO>/timit_stcn_validation.npz 
+        --test_data <PATH-TO>/timit_stcn_test.npz 
+        --save_dir <PATH-TO>/runs 
+        --eval_dir <PATH-TO>/evaluation_runs
+        --pp_zero_mean_norm_all_stats 
+        --run_evaluation_after_training
+"""
+
 
 def run_training(config_obj, early_stopping_tolerance=10, run_evaluation_after_training=False):
     training_engine = TrainingEngine(config_obj, early_stopping_tolerance)

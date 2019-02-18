@@ -1,0 +1,14 @@
+numpy
+scipy
+matplotlib
+opencv-python
+scikit-learn
+scikit-image
+scikit-video
+sklearn
+svgwrite
+librosa
+tables
+ujson
+pandas
+Pillow
