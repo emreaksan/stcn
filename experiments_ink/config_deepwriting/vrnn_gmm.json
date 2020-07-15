@@ -1,0 +1,74 @@
+{
+    "batch_size": 20,
+    "checkpoint_every_step": 1000,
+    "data_type": "dw",
+    "dataset_cls": "InkDatasetTF",
+    "evaluate_every_step": 500,
+    "fc_layer_activation_func": "relu",
+    "grad_clip_by_norm": 1,
+    "grad_clip_by_value": 0,
+    "hidden_size": 256,
+    "input_keep_prop": 1,
+    "input_layer": null,
+    "kld_loss": {
+        "type": "kld",
+        "weight": 1
+    },
+    "latent_hidden_size": 256,
+    "latent_rnn": {
+        "cell_type": "lstm",
+        "num_layers": 1,
+        "size": 1200
+    },
+    "latent_size": 128,
+    "learning_rate": 0.001,
+    "learning_rate_decay_rate": 0.97,
+    "learning_rate_decay_steps": 1000,
+    "learning_rate_type": "exponential",
+    "loss": {
+        "pen": {
+            "out_key": "out",
+            "target_idx": 1,
+            "type": "nll_bernoulli",
+            "weight": 1
+        },
+        "stroke": {
+            "num_components": 20,
+            "out_key": "out",
+            "target_idx": 0,
+            "type": "nll_gmm",
+            "weight": 1
+        }
+    },
+    "model_cls": "VRNN",
+    "model_type": "vrnn",
+    "num_epochs": 100,
+    "num_fc_layers": 1,
+    "output_layer": {
+        "activation_fn": "relu",
+        "num_layers": 2,
+        "out_activation_fn": [],
+        "out_dims": [],
+        "out_keys": [],
+        "size": 256
+    },
+    "pp_explicit_angle_axis": false,
+    "pp_ignore_zeros": false,
+    "pp_norm_ignore_zeros": false,
+    "pp_quantize": false,
+    "pp_relative_step": false,
+    "pp_scale_minus_one_one": false,
+    "pp_zero_mean_norm_all_stats": false,
+    "pp_zero_mean_norm_seq_stats": false,
+    "pp_zero_mean_normalization": true,
+    "print_every_step": 50,
+    "reduce_loss": "mean_step_loss",
+    "seed": 23,
+    "tensorboard_verbose": 1,
+    "test_model": false,
+    "use_batch_norm_fc": false,
+    "use_bucket_feeder": true,
+    "use_latent_h_in_outputs": true,
+    "validate_model": true,
+    "vrnn_cell_cls": "VRNNCell"
+}
